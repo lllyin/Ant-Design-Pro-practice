@@ -21,6 +21,7 @@ export default class LoginPage extends Component {
   }
 
   handleSubmit = (err, values) => {
+    console.log("登录：",values);
     const { type } = this.state;
     if (!err) {
       this.props.dispatch({

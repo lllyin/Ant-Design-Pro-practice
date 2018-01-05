@@ -82,9 +82,16 @@ class BasicLayout extends React.PureComponent {
         isMobile: mobile,
       });
     });
-    this.props.dispatch({
-      type: 'user/fetchCurrent',
-    });
+    if(!window.sessionStorage.getItem("userid")){
+      console.log("用户未登录");
+      this.props.history.push("/user/login");
+      // console.log(this.props);
+    }else{
+      // this.props.currentUser = JSON.parse(sessionStorage.getItem("userinfo"));
+    }
+    // this.props.dispatch({
+    //   type: 'user/fetchCurrent',
+    // });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -124,8 +131,10 @@ class BasicLayout extends React.PureComponent {
   }
   render() {
     const {
-      currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
+       collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
+    let currentUser = JSON.parse(window.sessionStorage.getItem("userinfo"));
+    console.log("baseLayout",this.props);
     const layout = (
       <Layout>
         <SiderMenu
@@ -205,8 +214,9 @@ class BasicLayout extends React.PureComponent {
 }
 
 export default connect(state => ({
-  currentUser: state.user.currentUser,
+  currentUser: state.login.currentUser,
   collapsed: state.global.collapsed,
   fetchingNotices: state.global.fetchingNotices,
   notices: state.global.notices,
+  login:state.login
 }))(BasicLayout);

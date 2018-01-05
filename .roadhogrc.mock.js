@@ -72,6 +72,12 @@ const proxy = {
     const { password, userName, type } = req.body;
     res.send({
       status: password === '888888' && userName === 'admin' ? 'ok' : 'error',
+      userinfo:{
+        name: '廖伦灵',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+        userid: '008',
+        notifyCount: 12,
+      },
       type,
     });
   },
@@ -128,5 +134,6 @@ const proxy = {
     });
   },
 };
+export default noProxy ? {} : format(proxy);
 
-export default noProxy ? {} : delay(proxy, 1000);
+// export default noProxy ? {} : delay(proxy, 1000);

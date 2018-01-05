@@ -21,7 +21,13 @@ export default {
       });
       // Login successfully
       if (response.status === 'ok') {
+        window.sessionStorage.setItem("userid",'008');
+        console.log("redux登录ok响应",response);
         yield put(routerRedux.push('/'));
+        yield put({
+          type: 'saveCurrentUser',
+          payload: response.userinfo,
+        });
       }
     },
     *logout(_, { put }) {
@@ -48,6 +54,15 @@ export default {
       return {
         ...state,
         submitting: payload,
+      };
+    },
+    saveCurrentUser(state, action) {
+      console.log("我是处理登录的,当前state：",state);
+      let userinfo = JSON.stringify(action.payload);
+      window.sessionStorage.setItem("userinfo",userinfo);
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     },
   },
