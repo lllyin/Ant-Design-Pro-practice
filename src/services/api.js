@@ -78,15 +78,16 @@ export async function queryNotices() {
   return request('/api/notices');
 }
 
-//GET请求page1
+// GET请求page1
 export async function queryPage1() {
-  console.log("queryPage1 i am run");
+  console.log('queryPage1 i am run');
   return request('/api/new/page1');
 }
-//请求page2数据
+
+// 请求page2数据
 export async function queryPage2(params) {
-  return request('/api/new/page2',{
-    method:'POST',
-    body:params
+  return request('/api/new/page2', {
+    method: 'POST',
+    body: params,
   });
 }

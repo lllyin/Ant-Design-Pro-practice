@@ -1,12 +1,12 @@
 import mockjs from 'mockjs';
-import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList } from './mock/api';
-import { getFakeChartData } from './mock/chart';
-import { imgMap } from './mock/utils';
-import { getProfileBasicData } from './mock/profile';
-import { getProfileAdvancedData } from './mock/profile';
-import { getNotices } from './mock/notices';
-import { format, delay } from 'roadhog-api-doc';
+import {getRule, postRule} from './mock/rule';
+import {getActivities, getNotice, getFakeList} from './mock/api';
+import {getFakeChartData} from './mock/chart';
+import {imgMap} from './mock/utils';
+import {getProfileBasicData} from './mock/profile';
+import {getProfileAdvancedData} from './mock/profile';
+import {getNotices} from './mock/notices';
+import {format, delay} from 'roadhog-api-doc';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -59,20 +59,20 @@ const proxy = {
     $body: postRule,
   },
   'POST /api/forms': (req, res) => {
-    res.send({ message: 'Ok' });
+    res.send({message: 'Ok'});
   },
   'GET /api/tags': mockjs.mock({
-    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }]
+    'list|100': [{name: '@city', 'value|1-100': 150, 'type|0-2': 1}]
   }),
   'GET /api/fake_list': getFakeList,
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
-    const { password, userName, type } = req.body;
+    const {password, userName, type} = req.body;
     res.send({
       status: password === '888888' && userName === 'admin' ? 'ok' : 'error',
-      userinfo:{
+      userinfo: {
         name: '廖伦灵',
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
         userid: '008',
@@ -82,28 +82,28 @@ const proxy = {
     });
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok' });
+    res.send({status: 'ok'});
   },
   'GET /api/notices': getNotices,
-  'GET /api/new/page1':{
+  'GET /api/new/page1': {
     $desc: "获取当前用户接口",
-      $params: {
-        pageSize: {
-          desc: '分页',
-            exp: 2,
-        },
+    $params: {
+      pageSize: {
+        desc: '分页',
+        exp: 2,
+      },
     },
     $body: {
-      status:'ok',
-      msg:'您正在以GET方式请求page1页面的数据'
+      status: 'ok',
+      msg: '您正在以GET方式请求page1页面的数据'
     }
   },
-  'POST /api/new/page2':(req,res) => {
-    console.log("page客户端传参：",req.body);
-    if(req.body.page === 'page2'){
-      res.send({status:'ok',msg:"您正在以POST方式请求page2页面的数据"})
-    }else{
-      res.send({status:'fail',msg:"您正在以POST方式请求page2页面的数据,但没有拿到数据"})
+  'POST /api/new/page2': (req, res) => {
+    console.log("page客户端传参：", req.body);
+    if (req.body.page === 'page2') {
+      res.send({status: 'ok', msg: "您正在以POST方式请求page2页面的数据"})
+    } else {
+      res.send({status: 'fail', msg: "您正在以POST方式请求page2页面的数据,但没有拿到数据"})
     }
   },
   'GET /api/500': (req, res) => {
@@ -134,6 +134,11 @@ const proxy = {
     });
   },
 };
-export default noProxy ? {} : format(proxy);
+export default noProxy ? {
+    'GET /api/(.*)': 'https://your.server.com/api/',
+    'POST /api/(.*)': 'https://your.server.com/api/',
+  }
+  :
+  format(proxy);
 
 // export default noProxy ? {} : delay(proxy, 1000);

@@ -1,5 +1,5 @@
 {
-  "entry": "src/index.js",
+  "entry": ["babel-polyfill","src/index.js"],
   "extraBabelPlugins": [
     "transform-runtime",
     "transform-decorators-legacy",

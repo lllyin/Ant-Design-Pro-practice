@@ -107,35 +107,35 @@ const menuData = [{
     name: '注册结果',
     path: 'register-result',
   }],
-},{
+}, {
   name: '新页面',
   icon: 'user',
   path: 'new',
   // target: '_blank',
-  children:[{
-      name:'页面1',
-      path:'page1',
-      children:[{
-        name:'页面1-1',
-        path:'page1-1'
-      },{
-        name:'页面1-2',
-        path:'page1-2'
-      },{
-        name:'页面1-3',
-        path:'page1-3'
-      }]
+  children: [{
+    name: '页面1',
+    path: 'page1',
+    children: [{
+      name: '页面1-1',
+      path: 'page1-1',
     }, {
-      name:'页面2',
-      path:'page2'
+      name: '页面1-2',
+      path: 'page1-2',
     }, {
-      name:'页面3',
-      path:'page3'
-    },{
-    name:'页面4',
-    path:'page4'
-  }
-  ]
+      name: '页面1-3',
+      path: 'page1-3',
+    }],
+  }, {
+    name: '页面2',
+    path: 'page2',
+  }, {
+    name: '页面3',
+    path: 'page3',
+  }, {
+    name: '页面4',
+    path: 'page4',
+  },
+  ],
 }, {
   name: '使用文档',
   icon: 'book',

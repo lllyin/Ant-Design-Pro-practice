@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { connect } from 'dva';
 import { Upload, message, Button, Icon } from 'antd';
 
@@ -40,10 +40,10 @@ function beforeUpload(file) {
 
 
 @connect(
-  state=>({newpage:state.newpage})
+  state => ({ newpage: state.newpage })
 )
-class Page2 extends React.Component{
-  constructor(props){
+class Page2 extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       loading: false,
@@ -51,7 +51,17 @@ class Page2 extends React.Component{
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange (info){
+  componentDidMount() {
+    // console.log('page2渲染好了', this.props);
+    this.props.dispatch({
+      type: 'newpage/testFetch2',
+      data: {
+        page: 'page2',
+      },
+    });
+  }
+
+  handleChange(info) {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
@@ -64,25 +74,17 @@ class Page2 extends React.Component{
       }));
     }
   }
-  componentDidMount(){
-    console.log("page2渲染好了",this.props);
-    this.props.dispatch({
-      type:'newpage/testFetch2',
-      data:{
-        page:'page2'
-      }
-    })
-  }
-  render(){
-    console.log("page2 props:",this.props);
+
+  render() {
+    // console.log('page2 props:', this.props);
+    const { imageUrl } = this.state;
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const imageUrl = this.state.imageUrl;
-    return(
+    return (
       <div>
         <h2>上传文件</h2>
         <Upload {...props1}>
@@ -105,8 +107,8 @@ class Page2 extends React.Component{
         </Upload>
       </div>
 
-    )
+    );
   }
-};
+}
 
 export default Page2;

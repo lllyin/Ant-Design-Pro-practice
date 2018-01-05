@@ -82,11 +82,11 @@ class BasicLayout extends React.PureComponent {
         isMobile: mobile,
       });
     });
-    if(!window.sessionStorage.getItem("userid")){
-      console.log("用户未登录");
-      this.props.history.push("/user/login");
+    if (!window.sessionStorage.getItem('userid')) {
+      console.log('用户未登录');
+      this.props.history.push('/user/login');
       // console.log(this.props);
-    }else{
+    } else {
       // this.props.currentUser = JSON.parse(sessionStorage.getItem("userinfo"));
     }
     // this.props.dispatch({
@@ -131,10 +131,10 @@ class BasicLayout extends React.PureComponent {
   }
   render() {
     const {
-       collapsed, fetchingNotices, notices, routerData, match, location,
+      collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
-    let currentUser = JSON.parse(window.sessionStorage.getItem("userinfo"));
-    console.log("baseLayout",this.props);
+    const currentUser = JSON.parse(window.sessionStorage.getItem('userinfo'));
+    console.log('baseLayout', this.props);
     const layout = (
       <Layout>
         <SiderMenu
@@ -218,5 +218,5 @@ export default connect(state => ({
   collapsed: state.global.collapsed,
   fetchingNotices: state.global.fetchingNotices,
   notices: state.global.notices,
-  login:state.login
+  login: state.login,
 }))(BasicLayout);

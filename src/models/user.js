@@ -16,7 +16,7 @@ export default {
         payload: true,
       });
       const response = yield call(queryUsers);
-      console.log("当前用户数据：",response);
+      console.log('当前用户数据：', response);
       yield put({
         type: 'save',
         payload: response,
